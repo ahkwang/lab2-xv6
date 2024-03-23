@@ -105,5 +105,13 @@ sys_info(void)
   sinfo.nproc = count_proc();
   if (copyout(myproc()->pagetable, addr, (char *)&sinfo, sizeof(sinfo)) < 0)
     return -1;
+
+}
+uint64
+sys_trace(void)
+{
+  int mask;
+  argint(0, &mask);
+  myproc()->syscall_trace = mask;
   return 0;
 }
